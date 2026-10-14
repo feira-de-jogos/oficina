@@ -13,8 +13,9 @@ const config = {
   height: 768,
   parent: "game-container",
   backgroundColor: "#028af8",
+  canvasStyle: "display: block; touch-action: none;",
   scale: {
-    mode: Scale.FIT,
+    mode: Scale.EXPAND,
     autoCenter: Scale.CENTER_BOTH,
   },
   scene: [Boot, Preloader, MainMenu, MainGame, GameOver],
