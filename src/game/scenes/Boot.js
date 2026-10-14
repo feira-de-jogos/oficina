@@ -17,7 +17,7 @@ export class Boot extends Scene {
         "background",
       )
       .setInteractive()
-      .once("pointerdown", () => {
+      .once("pointerup", () => {
         if (this.scale.fullscreen && this.scale.fullscreen.available) {
           this.scale.startFullscreen();
         }
