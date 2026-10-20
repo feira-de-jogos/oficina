@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import { Scene, Scale } from "phaser";
 
 export class Boot extends Scene {
   constructor() {
@@ -6,7 +6,7 @@ export class Boot extends Scene {
   }
 
   preload() {
-    this.load.image("background", "assets/bg.png");
+    this.load.image("background", "assets/boot.png");
   }
 
   create() {
@@ -21,9 +21,9 @@ export class Boot extends Scene {
         if (this.scale.fullscreen && this.scale.fullscreen.available) {
           this.scale.startFullscreen();
         }
-
-        this.scene.stop();
         this.scene.start("Preloader");
       });
+    
+    this.scene.start("Preloader");
   }
 }

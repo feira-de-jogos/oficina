@@ -5,15 +5,19 @@ import { MainMenu } from "./scenes/MainMenu";
 import { Preloader } from "./scenes/Preloader";
 import { AUTO, Game, Scale } from "phaser";
 
-//  Find out more information about the Game Config at:
-//  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
 const config = {
   type: AUTO,
-  width: 1024,
-  height: 768,
+  width: 1600,
+  height: 900,
   parent: "game-container",
-  backgroundColor: "#028af8",
+  backgroundColor: "#000000",
   canvasStyle: "display: block; touch-action: none;",
+  physics: {
+    default: "arcade",
+    arcade: {
+      debug: true,
+    },
+  },
   scale: {
     mode: Scale.EXPAND,
     autoCenter: Scale.CENTER_BOTH,
