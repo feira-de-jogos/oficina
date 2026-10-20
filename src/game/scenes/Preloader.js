@@ -26,11 +26,23 @@ export class Preloader extends Scene {
 
   preload() {
     this.load.setPath("assets");
+
     this.load.font("exo-2", "exo-2.ttf");
+
+    this.load.image("background", "background.png");
+    this.load.image("battery", "battery.png");
+    this.load.image("pill", "pill.png");
+    this.load.image("chip", "chip.png");
+
     this.load.spritesheet("player", "player.png", {
       frameWidth: 64,
       frameHeight: 64,
     });
+
+    this.load.audio("coin-1", "coin-1.mp3");
+    this.load.audio("coin-2", "coin-2.mp3");
+    this.load.audio("coin-3", "coin-3.mp3");
+    this.load.audio("music", "music.mp3");
   }
 
   create() {
