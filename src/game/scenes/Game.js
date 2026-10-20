@@ -14,12 +14,16 @@ export class Game extends Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.player = this.physics.add.sprite(
-      this.scale.width / 2,
-      this.scale.height / 2,
-      "player",
-      78,
-    );
+    this.lights.enable().setAmbientColor(0xffffff);
+
+    this.player = this.physics.add
+      .sprite(this.scale.width / 2, this.scale.height / 2, "player", 78)
+      .setLighting(true);
+
+    this.playerBacklight = this.lights
+      .addLight(this.player.x, this.player.y, 150)
+      .setColor(0xffffff)
+      .setIntensity(1);
 
     this.playerText = this.add.text(this.player.x, this.player.y - 48, "X, Y", {
       fontFamily: "exo-2",
@@ -35,6 +39,7 @@ export class Game extends Scene {
       if (battery.visible) {
         this.coin1.play();
         battery.setVisible(false);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
         if (this.lifeBar.width < 100) this.lifeBar.width += 50;
         else this.lifeBar.width = 150;
       }
@@ -45,6 +50,7 @@ export class Game extends Scene {
       if (pill.visible) {
         this.coin2.play();
         pill.setVisible(false);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
         if (this.mathBar.width < 100) this.mathBar.width += 50;
         else this.mathBar.width = 150;
       }
@@ -55,6 +61,7 @@ export class Game extends Scene {
       if (chip.visible) {
         this.coin3.play();
         chip.setVisible(false);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
         if (this.scienceBar.width < 100) this.scienceBar.width += 50;
         else this.scienceBar.width = 150;
       }
@@ -247,19 +254,22 @@ export class Game extends Scene {
       `x: ${Math.round(this.player.x)}, y: ${Math.round(this.player.y)}`,
     );
     this.playerText.setPosition(this.player.x, this.player.y - 48);
+    this.playerBacklight.setPosition(this.player.x, this.player.y);
 
     if (this.player.y < -200) {
       this.music.setVolume(1);
       this.music.setDetune(-1200);
       this.music.setRate(0.5);
+      this.lights.setAmbientColor(0x111111);
     } else if (this.player.y < -100) {
       this.music.setVolume(0.75);
+      this.lights.setAmbientColor(0x666666);
     } else if (this.player.y < 0) {
       this.music.setVolume(0.5);
-    } else if (this.player.y < 100) {
-      this.music.setVolume(0.25);
+      this.lights.setAmbientColor(0xaaaaaa);
     } else {
-      this.music.setVolume(0);
+      this.music.setVolume(0.25);
+      this.lights.setAmbientColor(0xffffff);
     }
   }
 }
