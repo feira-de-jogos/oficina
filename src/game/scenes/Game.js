@@ -13,7 +13,12 @@ export class Game extends Scene {
     this.coin2 = this.sound.add("coin-2");
     this.coin3 = this.sound.add("coin-3");
 
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.keys = this.input.keyboard.addKeys({
+      up: "W",
+      down: "S",
+      left: "A",
+      right: "D",
+    });
 
     this.lights.enable().setAmbientColor(0xffffff);
 
@@ -320,20 +325,20 @@ export class Game extends Scene {
   update() {
     let animation = "idle";
 
-    if (this.cursors.up.isDown) {
+    if (this.keys.up.isDown) {
       this.player.setVelocityY(-200);
       animation = "walking-up";
-    } else if (this.cursors.down.isDown) {
+    } else if (this.keys.down.isDown) {
       this.player.setVelocityY(200);
       animation = "walking-down";
     } else {
       this.player.setVelocityY(0);
     }
 
-    if (this.cursors.left.isDown) {
+    if (this.keys.left.isDown) {
       this.player.setVelocityX(-200);
       animation = "walking-left";
-    } else if (this.cursors.right.isDown) {
+    } else if (this.keys.right.isDown) {
       this.player.setVelocityX(200);
       animation = "walking-right";
     } else {
