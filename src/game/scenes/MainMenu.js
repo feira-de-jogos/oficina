@@ -11,7 +11,7 @@ export class MainMenu extends Scene {
     this.add
       .text(this.scale.width / 2, this.scale.height / 2 + 100, "Main Menu", {
         fontFamily: "exo-2",
-        fontSize: "72px",
+        fontSize: "36px",
         color: "#ffffff",
       })
       .setOrigin(0.5);
@@ -19,7 +19,5 @@ export class MainMenu extends Scene {
     this.input.on("pointerdown", () => {
       this.scene.start("Game");
     });
-
-    this.scene.start("Game");
   }
 }

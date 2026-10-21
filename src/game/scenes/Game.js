@@ -8,6 +8,7 @@ export class Game extends Scene {
   create() {
     this.music = this.sound.add("music");
     this.music.play({ loop: true, volume: 0.25 });
+
     this.coin1 = this.sound.add("coin-1");
     this.coin2 = this.sound.add("coin-2");
     this.coin3 = this.sound.add("coin-3");
@@ -16,9 +17,88 @@ export class Game extends Scene {
 
     this.lights.enable().setAmbientColor(0xffffff);
 
-    this.player = this.physics.add
-      .sprite(this.scale.width / 2, this.scale.height / 2, "player", 78)
+    this.tilemap = this.make.tilemap({ key: "map" });
+
+    this.tilesetPlant = this.tilemap.addTilesetImage("plant");
+    this.tilesetProps = this.tilemap.addTilesetImage("props");
+    this.tilesetShadowPlant = this.tilemap.addTilesetImage("shadow-plant");
+    this.tilesetShadow = this.tilemap.addTilesetImage("shadow");
+    this.tilesetStruct = this.tilemap.addTilesetImage("struct");
+    this.tilesetGrass = this.tilemap.addTilesetImage("grass");
+    this.tilesetStoneGround = this.tilemap.addTilesetImage("stone-ground");
+    this.tilesetWall = this.tilemap.addTilesetImage("wall");
+    this.tilesetAssetsAll = this.tilemap.addTilesetImage("assets-all");
+    this.tilesetStones = this.tilemap.addTilesetImage("stones");
+    this.tilesetGraveyard = this.tilemap.addTilesetImage("graveyard");
+
+    this.layerFloor = this.tilemap
+      .createLayer("floor", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
       .setLighting(true);
+
+    this.layerFloorWall1 = this.tilemap
+      .createLayer("floor-wall-1", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerRoofWall1 = this.tilemap
+      .createLayer("roof-wall-1", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerWallLab1 = this.tilemap
+      .createLayer("wall-lab-1", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.player = this.physics.add
+      .sprite(250, 3000, "player", 78)
+      .setLighting(true);
+    this.player.setSize(24, 48).setOffset(20, 16);
 
     this.playerBacklight = this.lights
       .addLight(this.player.x, this.player.y, 150)
@@ -34,12 +114,15 @@ export class Game extends Scene {
 
     this.cameras.main.startFollow(this.player);
 
+    this.physics.add.collider(this.player, this.layerFloorWall1);
+    this.physics.add.collider(this.player, this.layerRoofWall1);
+
     this.batteries = this.physics.add.group();
     this.physics.add.overlap(this.player, this.batteries, (player, battery) => {
       if (battery.visible) {
         this.coin1.play();
         battery.setVisible(false);
-        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.lifeBar.width < 100) this.lifeBar.width += 50;
         else this.lifeBar.width = 150;
       }
@@ -50,7 +133,7 @@ export class Game extends Scene {
       if (pill.visible) {
         this.coin2.play();
         pill.setVisible(false);
-        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.mathBar.width < 100) this.mathBar.width += 50;
         else this.mathBar.width = 150;
       }
@@ -61,35 +144,38 @@ export class Game extends Scene {
       if (chip.visible) {
         this.coin3.play();
         chip.setVisible(false);
-        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.5);
+        this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.scienceBar.width < 100) this.scienceBar.width += 50;
         else this.scienceBar.width = 150;
       }
     });
 
-    this.batteries.add(
-      this.physics.add.sprite(
-        this.scale.width / 2 - 100,
-        this.scale.height / 2,
-        "battery",
-      ),
-    );
+    const batteryPositions = [
+      { x: 100, y: 2900 },
+      { x: 100, y: 1800 },
+      { x: 100, y: 900 },
+    ];
+    batteryPositions.forEach((pos) => {
+      this.batteries.add(this.physics.add.sprite(pos.x, pos.y, "battery"));
+    });
 
-    this.pills.add(
-      this.physics.add.sprite(
-        this.scale.width / 2 - 200,
-        this.scale.height / 2,
-        "pill",
-      ),
-    );
+    const pillPositions = [
+      { x: 100, y: 2700 },
+      { x: 100, y: 2000 },
+      { x: 100, y: 1500 },
+    ];
+    pillPositions.forEach((pos) => {
+      this.pills.add(this.physics.add.sprite(pos.x, pos.y, "pill"));
+    });
 
-    this.chips.add(
-      this.physics.add.sprite(
-        this.scale.width / 2 - 300,
-        this.scale.height / 2,
-        "chip",
-      ),
-    );
+    const chipPositions = [
+      { x: 100, y: 2500 },
+      { x: 100, y: 2200 },
+      { x: 100, y: 2100 },
+    ];
+    chipPositions.forEach((pos) => {
+      this.chips.add(this.physics.add.sprite(pos.x, pos.y, "chip"));
+    });
 
     this.anims.create({
       key: "player-idle",
@@ -203,22 +289,28 @@ export class Game extends Scene {
     this.time.addEvent({
       delay: 1000,
       callback: () => {
-        this.lifeBar.width -= 5;
+        this.lifeBar.width -= 1;
         if (this.lifeBar.width <= 0) {
           this.music.stop();
-          this.scene.start("GameOver");
+          this.scene.start("GameOver", {
+            message: "Você morreu! Sua vida acabou!",
+          });
         }
 
-        this.mathBar.width -= 5;
+        this.mathBar.width -= 1;
         if (this.mathBar.width <= 0) {
           this.music.stop();
-          this.scene.start("GameOver");
+          this.scene.start("GameOver", {
+            message: "Você morreu! Sua matemática acabou!",
+          });
         }
 
-        this.scienceBar.width -= 5;
+        this.scienceBar.width -= 1;
         if (this.scienceBar.width <= 0) {
           this.music.stop();
-          this.scene.start("GameOver");
+          this.scene.start("GameOver", {
+            message: "Você morreu! Sua ciência acabou!",
+          });
         }
       },
       loop: true,
@@ -256,15 +348,23 @@ export class Game extends Scene {
     this.playerText.setPosition(this.player.x, this.player.y - 48);
     this.playerBacklight.setPosition(this.player.x, this.player.y);
 
-    if (this.player.y < -200) {
-      this.music.setVolume(1);
+    this.ending = this.physics.add.sprite(80, -800, "void").setOrigin(0.5, 0.5);
+    this.physics.add.overlap(this.player, this.ending, (player, ending) => {
+      this.music.stop();
+      this.scene.start("GameOver", {
+        message: "Parabéns!\nVocê completou o jogo!",
+      });
+    });
+
+    if (this.player.y < -350) {
+      this.music.setVolume(1.0);
       this.music.setDetune(-1200);
       this.music.setRate(0.5);
       this.lights.setAmbientColor(0x111111);
-    } else if (this.player.y < -100) {
+    } else if (this.player.y < 0) {
       this.music.setVolume(0.75);
       this.lights.setAmbientColor(0x666666);
-    } else if (this.player.y < 0) {
+    } else if (this.player.y < 1500) {
       this.music.setVolume(0.5);
       this.lights.setAmbientColor(0xaaaaaa);
     } else {
