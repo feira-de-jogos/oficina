@@ -36,8 +36,8 @@ export class Game extends Scene {
     this.tilesetStones = this.tilemap.addTilesetImage("stones");
     this.tilesetGraveyard = this.tilemap.addTilesetImage("graveyard");
 
-    this.layerFloor = this.tilemap
-      .createLayer("floor", [
+    this.layerGrassGround = this.tilemap
+      .createLayer("grass-ground", [
         this.tilesetPlant,
         this.tilesetProps,
         this.tilesetShadowPlant,
@@ -52,8 +52,8 @@ export class Game extends Scene {
       ])
       .setLighting(true);
 
-    this.layerFloorWall1 = this.tilemap
-      .createLayer("floor-wall-1", [
+    this.layerGroundWall = this.tilemap
+      .createLayer("ground-wall", [
         this.tilesetPlant,
         this.tilesetProps,
         this.tilesetShadowPlant,
@@ -68,24 +68,8 @@ export class Game extends Scene {
       ])
       .setLighting(true);
 
-    this.layerRoofWall1 = this.tilemap
-      .createLayer("roof-wall-1", [
-        this.tilesetPlant,
-        this.tilesetProps,
-        this.tilesetShadowPlant,
-        this.tilesetShadow,
-        this.tilesetStruct,
-        this.tilesetGrass,
-        this.tilesetStoneGround,
-        this.tilesetWall,
-        this.tilesetAssetsAll,
-        this.tilesetStones,
-        this.tilesetGraveyard,
-      ])
-      .setLighting(true);
-
-    this.layerWallLab1 = this.tilemap
-      .createLayer("wall-lab-1", [
+    this.layerRoofUnderPlayer = this.tilemap
+      .createLayer("roof-under-player", [
         this.tilesetPlant,
         this.tilesetProps,
         this.tilesetShadowPlant,
@@ -119,8 +103,101 @@ export class Game extends Scene {
 
     this.cameras.main.startFollow(this.player);
 
-    this.physics.add.collider(this.player, this.layerFloorWall1);
-    this.physics.add.collider(this.player, this.layerRoofWall1);
+    this.layerRoofAbovePlayer = this.tilemap
+      .createLayer("roof-above-player", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerWalls = this.tilemap
+      .createLayer("walls", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerPlants2 = this.tilemap
+      .createLayer("plants-2", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerProps1 = this.tilemap
+      .createLayer("props-1", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerProps2 = this.tilemap
+      .createLayer("props-2", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
+
+    this.layerPlants = this.tilemap
+      .createLayer("plants", [
+        this.tilesetPlant,
+        this.tilesetProps,
+        this.tilesetShadowPlant,
+        this.tilesetShadow,
+        this.tilesetStruct,
+        this.tilesetGrass,
+        this.tilesetStoneGround,
+        this.tilesetWall,
+        this.tilesetAssetsAll,
+        this.tilesetStones,
+        this.tilesetGraveyard,
+      ])
+      .setLighting(true);
 
     this.batteries = this.physics.add.group();
     this.physics.add.overlap(this.player, this.batteries, (player, battery) => {
