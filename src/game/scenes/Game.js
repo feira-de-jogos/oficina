@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import { Scene, Utils } from "phaser";
 
 export class Game extends Scene {
   constructor() {
@@ -199,6 +199,14 @@ export class Game extends Scene {
       ])
       .setLighting(true);
 
+    this.sentences = {
+      0: ["Estou aqui para ajudar.", "Conta comigo."],
+      1: ["Não seria melhor tentar outro dia?", "Está bem hoje?"],
+      2: ["Vocês não tem a competência necessária. Pare!", "Vá ler um livro!"],
+      3: ["Quem você pensa que é?", "Chama o teu superior. Já!"],
+    };
+    this.currentSentence = 0;
+
     this.batteries = this.physics.add.group();
     this.physics.add.overlap(this.player, this.batteries, (player, battery) => {
       if (battery.visible) {
@@ -397,6 +405,29 @@ export class Game extends Scene {
       },
       loop: true,
     });
+
+    this.sentenceText = this.add
+      .text(this.scale.width / 2, this.scale.height - 60, "", {
+        fontFamily: "exo-2",
+        fontSize: "28px",
+        color: "#ffffff",
+        stroke: "#000000",
+        strokeThickness: 4,
+        align: "center",
+      })
+      .setOrigin(0.5, 0.5)
+      .setScrollFactor(0)
+      .setDepth(100);
+
+    const scheduleSentence = () => {
+      this.time.delayedCall(Math.random() * 2000 + 3000, () => {
+        const list = this.sentences[this.currentSentence];
+        this.sentenceText.setText(Utils.Array.GetRandom(list));
+        this.time.delayedCall(2000, () => this.sentenceText.setText(""));
+        scheduleSentence();
+      });
+    };
+    scheduleSentence();
   }
 
   update() {
@@ -439,17 +470,21 @@ export class Game extends Scene {
     });
 
     if (this.player.y < -350) {
+      this.currentSentence = 3;
       this.music.setVolume(1.0);
       this.music.setDetune(-1200);
       this.music.setRate(0.5);
       this.lights.setAmbientColor(0x111111);
     } else if (this.player.y < 0) {
+      this.currentSentence = 2;
       this.music.setVolume(0.75);
       this.lights.setAmbientColor(0x666666);
     } else if (this.player.y < 1500) {
+      this.currentSentence = 1;
       this.music.setVolume(0.5);
       this.lights.setAmbientColor(0xaaaaaa);
     } else {
+      this.currentSentence = 0;
       this.music.setVolume(0.25);
       this.lights.setAmbientColor(0xffffff);
     }
