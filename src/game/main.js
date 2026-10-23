@@ -15,14 +15,20 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,
+      // debug: true,
     },
   },
   scale: {
     mode: Scale.EXPAND,
     autoCenter: Scale.CENTER_BOTH,
   },
-  scene: [Boot, Preloader, MainMenu, MainGame, GameOver],
+  scene: [
+    // Boot,
+    // Preloader,
+    // MainMenu,
+    // MainGame,
+    // GameOver
+  ],
 };
 
 const StartGame = (parent) => {
