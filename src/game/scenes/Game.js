@@ -47,6 +47,7 @@ export class Game extends Scene {
     this.currentStep = 0;
     this.speed = 500;
     this.playerCards = [];
+    this.playerCardsCount = 0;
 
     this.music = this.sound.add("music");
     this.music.play({ loop: true, volume: 0.25 });
@@ -241,6 +242,25 @@ export class Game extends Scene {
       ])
       .setLighting(true);
 
+    this.doors = this.physics.add.staticGroup();
+    const doorPositions = [{ x: -256, y: 934 }];
+    doorPositions.forEach((pos) => {
+      let sprite = this.physics.add.sprite(pos.x, pos.y, "door", 0);
+      this.doors.add(sprite);
+
+      const collider = this.physics.add.collider(
+        this.player,
+        sprite,
+        (player, sprite) => {
+          if (this.playerCardsCount >= 1) {
+            sprite.setFrame(1);
+            this.playerCardsCount--;
+            this.physics.world.removeCollider(collider);
+          }
+        },
+      );
+    });
+
     this.batteries = this.physics.add.group();
     const batteryPositions = [
       { x: 100, y: 2900, name: "Lélia Gonzalez" },
@@ -256,7 +276,8 @@ export class Game extends Scene {
       if (battery.visible) {
         this.coin1.play();
         battery.setVisible(false);
-        this.playerCards.push(battery.name)
+        this.playerCards.push(battery.name);
+        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.hummanitiesBar.width < 100) this.hummanitiesBar.width += 50;
         else this.hummanitiesBar.width = 150;
@@ -279,6 +300,7 @@ export class Game extends Scene {
         this.coin2.play();
         pill.setVisible(false);
         this.playerCards.push(pill.name);
+        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.healthBar.width < 100) this.healthBar.width += 50;
         else this.healthBar.width = 150;
@@ -301,6 +323,7 @@ export class Game extends Scene {
         this.coin3.play();
         chip.setVisible(false);
         this.playerCards.push(chip.name);
+        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.exactBar.width < 100) this.exactBar.width += 50;
         else this.exactBar.width = 150;
@@ -512,7 +535,7 @@ export class Game extends Scene {
 
     this.ending = this.physics.add.sprite(80, -800, "void").setOrigin(0.5, 0.5);
     this.physics.add.overlap(this.player, this.ending, (player, ending) => {
-      console.log(this.playerCards)
+      console.log(this.playerCards);
       this.music.stop();
       this.scene.start("GameOver", {
         message: "Parabéns!\nVocê completou o jogo!",

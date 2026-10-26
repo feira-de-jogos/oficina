@@ -52,6 +52,11 @@ export class Preloader extends Scene {
     this.load.image("chip", "chip.png");
     this.load.image("void", "void.png");
 
+    this.load.spritesheet("door", "door.png", {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
+
     this.load.spritesheet("player", "player.png", {
       frameWidth: 64,
       frameHeight: 64,
