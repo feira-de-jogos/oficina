@@ -256,7 +256,7 @@ export class Game extends Scene {
       if (battery.visible) {
         this.coin1.play();
         battery.setVisible(false);
-        console.log("Collected battery:", battery.name);
+        this.playerCards.push(battery.name)
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.hummanitiesBar.width < 100) this.hummanitiesBar.width += 50;
         else this.hummanitiesBar.width = 150;
@@ -270,7 +270,7 @@ export class Game extends Scene {
       { x: 100, y: 1500, name: "Jaqueline Goes de Jesus" },
     ];
     pillPositions.forEach((pos) => {
-      let sprite = this.physics.add.sprite(pos.x, pos.y, "pill")
+      let sprite = this.physics.add.sprite(pos.x, pos.y, "pill");
       sprite.name = pos.name;
       this.pills.add(sprite);
     });
@@ -469,6 +469,9 @@ export class Game extends Scene {
     };
     scheduleSentence();
 
+    this.layerGroundWall.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, this.layerGroundWall);
+
     this.layerWalls.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.layerWalls);
 
@@ -509,6 +512,7 @@ export class Game extends Scene {
 
     this.ending = this.physics.add.sprite(80, -800, "void").setOrigin(0.5, 0.5);
     this.physics.add.overlap(this.player, this.ending, (player, ending) => {
+      console.log(this.playerCards)
       this.music.stop();
       this.scene.start("GameOver", {
         message: "Parabéns!\nVocê completou o jogo!",
