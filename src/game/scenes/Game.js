@@ -47,7 +47,6 @@ export class Game extends Scene {
     this.currentStep = 0;
     this.speed = 500;
     this.playerCards = [];
-    this.playerCardsCount = 0;
 
     this.music = this.sound.add("music");
     this.music.play({ loop: true, volume: 0.25 });
@@ -242,30 +241,11 @@ export class Game extends Scene {
       ])
       .setLighting(true);
 
-    this.doors = this.physics.add.staticGroup();
-    const doorPositions = [{ x: -256, y: 934 }];
-    doorPositions.forEach((pos) => {
-      let sprite = this.physics.add.sprite(pos.x, pos.y, "door", 0);
-      this.doors.add(sprite);
-
-      const collider = this.physics.add.collider(
-        this.player,
-        sprite,
-        (player, sprite) => {
-          if (this.playerCardsCount >= 1) {
-            sprite.setFrame(1);
-            this.playerCardsCount--;
-            this.physics.world.removeCollider(collider);
-          }
-        },
-      );
-    });
-
     this.batteries = this.physics.add.group();
     const batteryPositions = [
-      { x: 100, y: 2900, name: "Lélia Gonzalez" },
-      { x: 100, y: 1800, name: "Niède Guidon" },
-      { x: 100, y: 900, name: "Sueli Carneiro" },
+      { x: 318, y: 192, name: "Lélia Gonzalez" },
+      { x: 28, y: 822, name: "Niède Guidon" },
+      { x: 80, y: 2582, name: "Sueli Carneiro" },
     ];
     batteryPositions.forEach((pos) => {
       let sprite = this.physics.add.sprite(pos.x, pos.y, "battery");
@@ -277,7 +257,6 @@ export class Game extends Scene {
         this.coin1.play();
         battery.setVisible(false);
         this.playerCards.push(battery.name);
-        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.hummanitiesBar.width < 100) this.hummanitiesBar.width += 50;
         else this.hummanitiesBar.width = 150;
@@ -286,9 +265,9 @@ export class Game extends Scene {
 
     this.pills = this.physics.add.group();
     const pillPositions = [
-      { x: 100, y: 2700, name: "Mayana Zatz" },
-      { x: 100, y: 2000, name: "Celina Turchi" },
-      { x: 100, y: 1500, name: "Jaqueline Goes de Jesus" },
+      { x: 834, y: -336, name: "Mayana Zatz" },
+      { x: -639, y: 1163, name: "Celina Turchi" },
+      { x: 1012, y: 1344, name: "Jaqueline Goes de Jesus" },
     ];
     pillPositions.forEach((pos) => {
       let sprite = this.physics.add.sprite(pos.x, pos.y, "pill");
@@ -300,7 +279,6 @@ export class Game extends Scene {
         this.coin2.play();
         pill.setVisible(false);
         this.playerCards.push(pill.name);
-        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.healthBar.width < 100) this.healthBar.width += 50;
         else this.healthBar.width = 150;
@@ -309,9 +287,9 @@ export class Game extends Scene {
 
     this.chips = this.physics.add.group();
     const chipPositions = [
-      { x: 100, y: 2500, name: "Sonia Guimarães" },
-      { x: 100, y: 2200, name: "Marcia Barbosa" },
-      { x: 100, y: 2100, name: "Thaisa Storchi Bergmann" },
+      { x: 334, y: 1775, name: "Sonia Guimarães" },
+      { x: 786, y: -559, name: "Marcia Barbosa" },
+      { x: 915, y: 528, name: "Thaisa Storchi Bergmann" },
     ];
     chipPositions.forEach((pos) => {
       let sprite = this.physics.add.sprite(pos.x, pos.y, "chip");
@@ -323,7 +301,6 @@ export class Game extends Scene {
         this.coin3.play();
         chip.setVisible(false);
         this.playerCards.push(chip.name);
-        this.playerCardsCount++;
         this.playerBacklight.setIntensity(this.playerBacklight.intensity + 0.1);
         if (this.exactBar.width < 100) this.exactBar.width += 50;
         else this.exactBar.width = 150;
