@@ -7,7 +7,7 @@ export class GameOver extends Scene {
 
   create(data) {
     this.add
-      .image(this.scale.width / 2, this.scale.height / 2, "background")
+      .image(this.scale.width / 2, this.scale.height / 2, "gameover")
       .setAlpha(0.5);
 
     const text = data.message || "Game Over";

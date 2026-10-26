@@ -6,7 +6,7 @@ export class MainMenu extends Scene {
   }
 
   create() {
-    this.add.image(this.scale.width / 2, this.scale.height / 2, "background");
+    this.add.image(this.scale.width / 2, this.scale.height / 2, "boot");
 
     this.add
       .text(this.scale.width / 2, this.scale.height / 2 + 100, "Main Menu", {

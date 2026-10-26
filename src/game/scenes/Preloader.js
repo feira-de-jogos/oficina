@@ -6,7 +6,7 @@ export class Preloader extends Scene {
   }
 
   init() {
-    this.add.image(this.scale.width / 2, this.scale.height / 2, "background");
+    this.add.image(this.scale.width / 2, this.scale.height / 2, "boot");
     this.add
       .rectangle(this.scale.width / 2, this.scale.height / 2 + 100, 500, 32)
       .setStrokeStyle(2, 0xffffff);
@@ -56,6 +56,8 @@ export class Preloader extends Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
+
+    this.load.image("gameover", "gameover.png");
   }
 
   create() {

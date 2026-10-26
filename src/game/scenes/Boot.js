@@ -6,7 +6,7 @@ export class Boot extends Scene {
   }
 
   preload() {
-    this.load.image("background", "assets/boot.png");
+    this.load.image("boot", "assets/boot.png");
   }
 
   create() {
@@ -14,7 +14,7 @@ export class Boot extends Scene {
       .image(
         this.game.config.width / 2,
         this.game.config.height / 2,
-        "background",
+        "boot",
       )
       .setInteractive()
       .once("pointerup", () => {
