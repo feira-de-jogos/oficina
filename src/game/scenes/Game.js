@@ -45,7 +45,7 @@ export class Game extends Scene {
 
   create() {
     this.currentStep = 0;
-    this.speed = 500;
+    this.speed = 200;
     this.playerCards = [];
     this.playerCardsCount = 0;
 
