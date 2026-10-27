@@ -6,6 +6,7 @@ export class GameOver extends Scene {
   }
 
   create(data) {
+    /*
     this.add
       .image(this.scale.width / 2, this.scale.height / 2, "gameover")
       .setAlpha(0.5);
@@ -112,5 +113,6 @@ export class GameOver extends Scene {
     this.input.on("pointerdown", () => {
       this.scene.start("MainMenu");
     });
+    */
   }
 }

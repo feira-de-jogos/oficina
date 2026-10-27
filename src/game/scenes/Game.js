@@ -44,27 +44,38 @@ export class Game extends Scene {
   }
 
   create() {
+    /*
     this.currentStep = 0;
     this.speed = 200;
     this.playerCards = [];
     this.playerCardsCount = 0;
-
+    */
+    
+    /*
     this.music = this.sound.add("music");
     this.music.play({ loop: true, volume: 0.25 });
-
+    */
+    
+    /*
     this.coin1 = this.sound.add("coin-1");
     this.coin2 = this.sound.add("coin-2");
     this.coin3 = this.sound.add("coin-3");
-
+    */
+    
+    /*
     this.keys = this.input.keyboard.addKeys({
       up: "W",
       down: "S",
       left: "A",
       right: "D",
     });
+    */
 
+    /*
     this.lights.enable().setAmbientColor(0xffffff);
-
+    */
+    
+    /*
     this.tilemap = this.make.tilemap({ key: "map" });
 
     this.tilesetPlant = this.tilemap.addTilesetImage("plant");
@@ -78,7 +89,9 @@ export class Game extends Scene {
     this.tilesetAssetsAll = this.tilemap.addTilesetImage("assets-all");
     this.tilesetStones = this.tilemap.addTilesetImage("stones");
     this.tilesetGraveyard = this.tilemap.addTilesetImage("graveyard");
+    */
 
+    /*
     this.layerGrassGround = this.tilemap
       .createLayer("grass-ground", [
         this.tilesetPlant,
@@ -94,7 +107,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
+    */
 
+    /*
     this.layerGroundWall = this.tilemap
       .createLayer("ground-wall", [
         this.tilesetPlant,
@@ -110,7 +125,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
-
+    */
+    
+    /*
     this.layerRoofUnderPlayer = this.tilemap
       .createLayer("roof-under-player", [
         this.tilesetPlant,
@@ -126,7 +143,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
-
+    */
+    
+    /*
     this.player = this.physics.add
       .sprite(250, 3000, "player", 78)
       .setLighting(true);
@@ -143,9 +162,13 @@ export class Game extends Scene {
       color: "#ffffff",
     });
     this.playerText.setOrigin(0.5, 0);
-
+    */
+    
+    /*
     this.cameras.main.startFollow(this.player);
-
+    */
+    
+    /*
     this.layerRoofAbovePlayer = this.tilemap
       .createLayer("roof-above-player", [
         this.tilesetPlant,
@@ -161,7 +184,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
-
+    */
+    
+    /*
     this.layerWalls = this.tilemap
       .createLayer("walls", [
         this.tilesetPlant,
@@ -177,7 +202,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
-
+    */
+    
+    /*
     this.layerPlants2 = this.tilemap
       .createLayer("plants-2", [
         this.tilesetPlant,
@@ -193,7 +220,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
-
+    */
+    
+    /*
     this.layerProps1 = this.tilemap
       .createLayer("props-1", [
         this.tilesetPlant,
@@ -209,7 +238,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
+    */
 
+    /*
     this.layerProps2 = this.tilemap
       .createLayer("props-2", [
         this.tilesetPlant,
@@ -225,7 +256,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
+    */
 
+    /*
     this.layerPlants = this.tilemap
       .createLayer("plants", [
         this.tilesetPlant,
@@ -241,7 +274,9 @@ export class Game extends Scene {
         this.tilesetGraveyard,
       ])
       .setLighting(true);
+    */
 
+    /*
     this.doors = this.physics.add.staticGroup();
     const doorPositions = [
       { x: 960, y: 1640 },
@@ -269,7 +304,9 @@ export class Game extends Scene {
         },
       );
     });
+    */
 
+    /*
     this.batteries = this.physics.add.group();
     const batteryPositions = [
       { x: 318, y: 192, name: "Lélia Gonzalez" },
@@ -292,7 +329,9 @@ export class Game extends Scene {
         else this.hummanitiesBar.width = 150;
       }
     });
+    */
 
+    /*
     this.pills = this.physics.add.group();
     const pillPositions = [
       { x: 834, y: -336, name: "Mayana Zatz" },
@@ -315,7 +354,9 @@ export class Game extends Scene {
         else this.healthBar.width = 150;
       }
     });
+    */
 
+    /*
     this.chips = this.physics.add.group();
     const chipPositions = [
       { x: 334, y: 1775, name: "Sonia Guimarães" },
@@ -338,7 +379,9 @@ export class Game extends Scene {
         else this.exactBar.width = 150;
       }
     });
+    */
 
+    /*
     this.anims.create({
       key: "player-idle",
       frames: this.anims.generateFrameNumbers("player", {
@@ -387,7 +430,9 @@ export class Game extends Scene {
       frameRate: 12,
       repeat: -1,
     });
+    */
 
+    /*
     this.hummanities = this.add
       .rectangle(25, 25, 150, 24)
       .setOrigin(0, 0)
@@ -447,7 +492,9 @@ export class Game extends Scene {
       })
       .setOrigin(0, 0)
       .setScrollFactor(0);
-
+    */
+    
+    /*
     this.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -477,7 +524,9 @@ export class Game extends Scene {
       },
       loop: true,
     });
-
+    */
+    
+    /*
     this.sentenceText = this.add
       .text(this.scale.width / 2, this.scale.height - 60, "", {
         fontFamily: "exo-2",
@@ -500,7 +549,9 @@ export class Game extends Scene {
       });
     };
     scheduleSentence();
+    */
 
+    /*
     this.layerGroundWall.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.layerGroundWall);
 
@@ -509,9 +560,11 @@ export class Game extends Scene {
 
     this.layerProps2.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.layerProps2);
+    */
   }
 
   update() {
+    /*
     let animation = "idle";
 
     if (this.keys.up.isDown) {
@@ -541,7 +594,9 @@ export class Game extends Scene {
     );
     this.playerText.setPosition(this.player.x, this.player.y - 48);
     this.playerBacklight.setPosition(this.player.x, this.player.y);
+    */
 
+    /*
     this.ending = this.physics.add.sprite(80, -800, "void").setOrigin(0.5, 0.5);
     this.physics.add.collider(this.player, this.ending, (player, ending) => {
       console.log(this.playerCards);
@@ -566,5 +621,6 @@ export class Game extends Scene {
     this.music.setDetune(this.steps[this.currentStep].detune);
     this.music.setRate(this.steps[this.currentStep].rate);
     this.lights.setAmbientColor(this.steps[this.currentStep].ambientColor);
+    */
   }
 }

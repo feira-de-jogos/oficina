@@ -6,10 +6,13 @@ export class Boot extends Scene {
   }
 
   preload() {
+    /*
     this.load.image("boot", "assets/boot.png");
+    */
   }
 
   create() {
+    /*
     this.add
       .image(
         this.game.config.width / 2,
@@ -23,5 +26,6 @@ export class Boot extends Scene {
         }
         this.scene.start("Preloader");
       });
+    */
   }
 }

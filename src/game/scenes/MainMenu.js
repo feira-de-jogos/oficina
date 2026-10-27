@@ -6,6 +6,7 @@ export class MainMenu extends Scene {
   }
 
   create() {
+    /*
     this.add.image(this.scale.width / 2, this.scale.height / 2, "boot");
 
     this.add
@@ -19,5 +20,6 @@ export class MainMenu extends Scene {
     this.input.on("pointerdown", () => {
       this.scene.start("Game");
     });
+    */
   }
 }

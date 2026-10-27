@@ -6,6 +6,7 @@ export class Preloader extends Scene {
   }
 
   init() {
+    /*
     this.add.image(this.scale.width / 2, this.scale.height / 2, "boot");
     this.add
       .rectangle(this.scale.width / 2, this.scale.height / 2 + 100, 500, 32)
@@ -22,9 +23,11 @@ export class Preloader extends Scene {
     this.load.on("progress", (progress) => {
       bar.width = 4 + 492 * progress;
     });
+    */
   }
 
   preload() {
+    /*
     this.load.setPath("assets");
 
     this.load.font("exo-2", "exo-2.ttf");
@@ -63,9 +66,12 @@ export class Preloader extends Scene {
     });
 
     this.load.image("gameover", "gameover.png");
+    */
   }
 
   create() {
+    /*
     this.scene.start("MainMenu");
+    */
   }
 }
